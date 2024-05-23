@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const { artistId } = Astro.params;
+
+const response = await fetch(Astro.url.origin + "/api/artists/" + artistId);
+const artistData = await response.json();
+---
+
+<Layout title="white---noise --- home">
+  <main>
+    <h2>{artistData.name}</h2>
+	<p>{artistData.profile}</p>
+  </main>
+</Layout>

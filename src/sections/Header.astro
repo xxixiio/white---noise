@@ -1,0 +1,84 @@
+---
+import Logo from "../components/Logo.astro";
+import HamburguerIcon from "../icons/hamburguer.astro";
+---
+
+<header class="header__container">
+  <a href="">
+    <Logo class:list={"logo"} />
+  </a>
+  <div class="header__menu">
+    <HamburguerIcon class:list={"header__hamburguer"} />
+    <ul class="header__links">
+      <li><a href="">ABOUT</a></li>
+      <li><a href="">VINYLS</a></li>
+      <li><a href="">ARTISTS</a></li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  .header__container {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    padding: 20px 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: block;
+    margin: auto;
+    width: 30vw;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .header__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .header__links > li > a {
+    padding: 4px 8px;
+    border-radius: var(--border-radius);
+  }
+
+  .header__links > li > a:hover {
+    opacity: 0.8;
+    background-color: var(--color-pale-purple);
+    text-decoration: underline;
+  }
+
+  .header__hamburguer {
+    display: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+  .logo {
+    width: 60vw;
+    margin: 0;
+  }
+
+  .header__links {
+    display: none;
+  }
+
+  .header__container {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .header__hamburguer {
+    width: 35px;
+    display: inline;
+  }
+
+  .header__menu {
+    height: 35px;
+  }
+}
+</style>
