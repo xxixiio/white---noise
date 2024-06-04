@@ -1,0 +1,19 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+interface Album {
+    title: string
+}
+
+const { albumId } = Astro.params;
+
+const response = await fetch(`${Astro.url.origin}/api/albums/${albumId}`);
+const albumData = await response.json()
+---
+
+<Layout title="white---noise --- home">
+  <main>
+    <h2>{albumData.name}</h2>
+    <p>{albumData.artists.map(x => x.name).join(", ")}</p>
+  </main>
+</Layout>

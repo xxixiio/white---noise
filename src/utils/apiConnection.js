@@ -1,15 +1,13 @@
-import Disconnect from "disconnect";
-
-let Discogs = Disconnect.Client;
-let dis = new Discogs("MyDiscogsClient/1.0", {
-  consumerKey: "zBrwFMQCpSOKvftzYmqu",
-  consumerSecret: "jjvSRndPhZqQRRRskOnVyhXZrbiojVUp",
-});
-let db = dis.database();
+import 'dotenv/config';
+import SpotifyAPI from "spotify-api.js";
+const client = new SpotifyAPI.Client({ 
+  token: { clientID: process.env.SPOTIFY_CLIENT_ID, clientSecret: process.env.SPOTIFY_SECRET },
+  onReady() {
+      console.log("Connected to Spotify")
+  }
+}) 
 
 export {
-    Disconnect,
-    Discogs,
-    dis,
-    db
+  SpotifyAPI,
+  client
 }

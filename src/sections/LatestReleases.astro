@@ -1,0 +1,25 @@
+---
+import AlbumDisplay from "../components/AlbumDisplay.astro";
+
+const response = await fetch(Astro.url.origin + "/api/albums/get-new-releases");
+const newReleases = await response.json();
+---
+
+<section>
+    <h2>Latest Releases</h2>
+    <div class="latest__container">
+      {
+        newReleases.map((a, i) => (
+          <AlbumDisplay title={a.name} image={a.images[0].url} artists={a.artists} id={a.id}/>
+        ))
+      }
+    </div>
+  </section>
+
+<style>
+    .latest__container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        row-gap: 25px;
+    }
+</style>

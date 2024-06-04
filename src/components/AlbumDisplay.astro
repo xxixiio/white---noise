@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  image: string;
+  artists: Artists[];
+  id: string;
+}
+
+interface Artists {
+  id: string;
+  name: string;
+}
+
+const { title, image, artists, id } = Astro.props;
+---
+
+<a href={"/albums/" + id} class="album-display__container">
+  <img src={image} />
+  <p>{title}</p>
+  <p>{artists.map(x => x.name).join(", ")}</p>
+</a>
+
+<style>
+  .album-display__container {
+    text-align: center;
+  }
+</style>
