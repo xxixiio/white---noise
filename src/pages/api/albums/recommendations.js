@@ -1,4 +1,4 @@
-import { client } from "../../utils/apiConnection";
+import { client } from "../../../utils/apiConnection";
 
 export const GET = async ({ params, request }) => {
   const url = new URL(request.url);

@@ -51,7 +51,7 @@ const albumData = await response.json();
   [...document.querySelectorAll('.play-button')].forEach(function(item) {
   item.addEventListener('click', function() {
     let id = item.id;
-    let audio = document.getElementById("audio_" + id);
+    let audio = document.getElementById("audio_" + id) as HTMLAudioElement;
     if (audio.paused) {
       stopAllAudios(audio); 
       audio.play();
