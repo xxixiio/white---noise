@@ -31,7 +31,7 @@ const albumData = await response.json();
             {
               track.previewURL ? (
               <button id={track.id} class="play-button">Play</button>
-              <audio id={"audio_" + track.id} src={track.previewURL}/>
+              <audio id={"audio_" + track.id} src={track.previewURL} class="audio-preview"/>
               ) :
               null
             }
@@ -47,10 +47,18 @@ const albumData = await response.json();
 <script>
   [...document.querySelectorAll('.play-button')].forEach(function(item) {
   item.addEventListener('click', function() {
+    stopAllAudios();
     let id = item.id;
     let audio = document.getElementById("audio_" + id);
     audio.play()
-  });
+    });
    });
+
+   function stopAllAudios() {
+    [...document.querySelectorAll('.audio-preview')].forEach(function(item) {
+      item.pause();
+      item.currentTime = 0;
+   });
+   }
 
 </script>
