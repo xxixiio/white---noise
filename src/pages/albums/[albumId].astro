@@ -45,11 +45,15 @@ const albumData = await response.json();
 </Layout>
 
 <script>
+
+  let volume = 0.5;
+
   [...document.querySelectorAll('.play-button')].forEach(function(item) {
   item.addEventListener('click', function() {
     stopAllAudios();
     let id = item.id;
     let audio = document.getElementById("audio_" + id);
+    audio.volume = volume
     audio.play()
     });
    });
