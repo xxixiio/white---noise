@@ -2,18 +2,55 @@
 import Layout from "../../layouts/Layout.astro";
 
 interface Album {
-    title: string
+  title: string;
 }
 
 const { albumId } = Astro.params;
 
 const response = await fetch(`${Astro.url.origin}/api/albums/${albumId}`);
-const albumData = await response.json()
+const albumData = await response.json();
 ---
 
 <Layout title="white---noise --- home">
   <main>
-    <h2>{albumData.name}</h2>
-    <p>{albumData.artists.map(x => x.name).join(", ")}</p>
+    <div>
+      <img
+        src={albumData.images[0].url}
+        alt={albumData.name + " album cover"}
+      />
+    </div>
+    <div>
+      <h2>{albumData.name}</h2>
+      <p>by {albumData.artists.map((x) => x.name).join(", ")}</p>
+    </div>
+    <div>
+      <h3>Tracklist</h3>
+      {
+        albumData.tracks.map(track => (
+          <p>
+            {
+              track.previewURL ? (
+              <button id={track.id} class="play-button">Play</button>
+              <audio id={"audio_" + track.id} src={track.previewURL}/>
+              ) :
+              null
+            }
+            {track.trackNumber}. {track.name} | {track.artists.map(a => a.name).join(", ")}
+            <a href={track.externalURL.spotify} target="_blank">Open on Spotify</a>
+          </p>
+        ))
+      }
+    </div>
   </main>
 </Layout>
+
+<script>
+  [...document.querySelectorAll('.play-button')].forEach(function(item) {
+  item.addEventListener('click', function() {
+    let id = item.id;
+    let audio = document.getElementById("audio_" + id);
+    audio.play()
+  });
+   });
+
+</script>
