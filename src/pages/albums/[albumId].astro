@@ -50,19 +50,25 @@ const albumData = await response.json();
 
   [...document.querySelectorAll('.play-button')].forEach(function(item) {
   item.addEventListener('click', function() {
-    stopAllAudios();
     let id = item.id;
     let audio = document.getElementById("audio_" + id);
-    audio.volume = volume
-    audio.play()
-    });
-   });
+    if (audio.paused) {
+      stopAllAudios(audio); 
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  });
+});
 
-   function stopAllAudios() {
-    [...document.querySelectorAll('.audio-preview')].forEach(function(item) {
-      item.pause();
-      item.currentTime = 0;
-   });
-   }
+function stopAllAudios(exceptAudio = null) {
+  const audios = document.querySelectorAll('audio');
+  audios.forEach(function(audio) {
+    if (audio !== exceptAudio) {
+      audio.pause();
+      audio.currentTime = 0; 
+    }
+  });
+}
 
 </script>
