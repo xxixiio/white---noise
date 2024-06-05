@@ -11,7 +11,7 @@ const response = await fetch(`${Astro.url.origin}/api/albums/${albumId}`);
 const albumData = await response.json();
 ---
 
-<Layout title="white---noise --- home">
+<Layout title={albumData.name + " / white---noise"}>
   <main>
     <div>
       <img

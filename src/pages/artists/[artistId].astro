@@ -7,7 +7,7 @@ const response = await fetch(Astro.url.origin + "/api/artists/" + artistId);
 const artistData = await response.json();
 ---
 
-<Layout title="white---noise --- home">
+<Layout title={artistData.name + " / white---noise"}>
   <main>
     <h2>{artistData.name}</h2>
   </main>
