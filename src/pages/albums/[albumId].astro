@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Tracklist from "../../components/Tracklist.astro";
 
 interface Album {
   title: string;
@@ -25,54 +26,7 @@ const albumData = await response.json();
     </div>
     <div>
       <h3>Tracklist</h3>
-      {
-        albumData.tracks.map(track => (
-          <p>
-            {
-              track.previewURL ? (
-              <button id={track.id} class="play-button">Play</button>
-              <audio id={"audio_" + track.id} src={track.previewURL} class="audio-preview"/>
-              ) :
-              null
-            }
-            {track.trackNumber}. {track.name} | {track.artists.map(a => a.name).join(", ")}
-            <a href={track.externalURL.spotify} target="_blank">Open on Spotify</a>
-          </p>
-        ))
-      }
+      <Tracklist tracks={albumData.tracks} />
     </div>
   </main>
 </Layout>
-
-<script>
-
-  let volume = 0.5;
-
-  [...document.querySelectorAll('.play-button')].forEach(function(item) {
-  item.addEventListener('click', function() {
-    let id = item.id;
-    let audio = document.getElementById("audio_" + id) as HTMLAudioElement;
-    if (audio.paused) {
-      stopAllAudios(audio); 
-      audio.play();
-      item.textContent = "Stop";
-    } else {
-      audio.pause();
-      item.textContent = "Play";
-    }
-  });
-});
-
-function stopAllAudios(exceptAudio = null) {
-  const audios = document.querySelectorAll('audio');
-  audios.forEach(function(audio) {
-    if (audio !== exceptAudio) {
-      const button = document.getElementById(audio.id.replace("audio_", ""))
-      audio.pause();
-      audio.currentTime = 0;
-      button.textContent = "Play";
-    }
-  });
-}
-
-</script>
