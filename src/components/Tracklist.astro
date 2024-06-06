@@ -1,4 +1,6 @@
 ---
+import Play from "../icons/play.astro";
+import Pause from "../icons/pause.astro";
 import SpotifyIcon from "../icons/spotify.astro";
 
 interface Props {
@@ -14,13 +16,16 @@ const { tracks } = Astro.props;
           <p class="tracklist__item">
             {
               track.previewURL ? (
-              <button id={track.id} class="tracklist__play">Play</button>
+              <button id={track.id} class="tracklist__play">
+                <Play id={"play_" + track.id}/>
+                <Pause id={"pause_" + track.id} class:list={"hide"} />
+              </button>
               <audio id={"audio_" + track.id} src={track.previewURL} class="audio-preview"/>
               ) :
               null
             }
             <span>{track.trackNumber}. <b>{track.name}</b> | {track.artists.map(a => a.name).join(", ")}</span>
-            <a href={track.externalURL.spotify} target="_blank" class="tracklist__spotify-link">
+            <a href={track.externalURL.spotify} target="_blank" class="tracklist__spotify-link" title="Open on Spotify">
             <SpotifyIcon class:list={"tracklist__spotify-icon"}/>
             </a>
           </p>
@@ -39,7 +44,7 @@ const { tracks } = Astro.props;
 }
 
 .tracklist__item {
-    padding: 10px 0;
+    padding: 10px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -57,28 +62,34 @@ const { tracks } = Astro.props;
 </style>
 
 <script>
-
-    let volume = 0.5;
+  let volume = 0.5;
   
   [...document.querySelectorAll('.tracklist__play')].forEach(function(item) {
     item.addEventListener('click', function() {
       let id = item.id;
       let audio = document.getElementById("audio_" + id) as HTMLAudioElement;
+      const playIcon = document.getElementById("play_" + id);
+      const pauseIcon = document.getElementById("pause_" + id);
+      
       if (audio.paused) {
-        stopAllAudios(audio); 
+        stopAllAudios(audio);
         audio.play();
-        item.textContent = "Stop";
+        playIcon.classList.add('hide');
+        pauseIcon.classList.remove('hide');
       } else {
         audio.pause();
-        item.textContent = "Play";
+        playIcon.classList.remove('hide');
+        pauseIcon.classList.add('hide');
       }
     });
   });
   
   [...document.querySelectorAll('audio')].forEach(function(item) {
     item.addEventListener('ended', function() {
-      const button = document.getElementById(item.id.replace("audio_", ""))
-      button.textContent = "Play";
+      const playIcon = document.getElementById("play_" + item.id.replace("audio_", ""));
+      const pauseIcon = document.getElementById("pause_" + item.id.replace("audio_", ""));
+      playIcon.classList.remove('hide');
+      pauseIcon.classList.add('hide');
     });
   });
   
@@ -86,10 +97,12 @@ const { tracks } = Astro.props;
     const audios = document.querySelectorAll('audio');
     audios.forEach(function(audio) {
       if (audio !== exceptAudio) {
-        const button = document.getElementById(audio.id.replace("audio_", ""))
+        const playIcon = document.getElementById("play_" + audio.id.replace("audio_", ""));
+        const pauseIcon = document.getElementById("pause_" + audio.id.replace("audio_", ""));
         audio.pause();
         audio.currentTime = 0;
-        button.textContent = "Play";
+        playIcon.classList.remove('hide');
+        pauseIcon.classList.add('hide');
       }
     });
   }
