@@ -55,8 +55,10 @@ const albumData = await response.json();
     if (audio.paused) {
       stopAllAudios(audio); 
       audio.play();
+      item.textContent = "Stop";
     } else {
       audio.pause();
+      item.textContent = "Play";
     }
   });
 });
@@ -65,8 +67,10 @@ function stopAllAudios(exceptAudio = null) {
   const audios = document.querySelectorAll('audio');
   audios.forEach(function(audio) {
     if (audio !== exceptAudio) {
+      const button = document.getElementById(audio.id.replace("audio_", ""))
       audio.pause();
-      audio.currentTime = 0; 
+      audio.currentTime = 0;
+      button.textContent = "Play";
     }
   });
 }
