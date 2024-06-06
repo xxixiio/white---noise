@@ -14,19 +14,41 @@ const albumData = await response.json();
 
 <Layout title={albumData.name + " / white---noise"}>
   <main>
-    <div>
-      <img
-        src={albumData.images[0].url}
-        alt={albumData.name + " album cover"}
-      />
+    <div class="albuminfo__container">
+      <div>
+        <img
+          src={albumData.images[0].url}
+          alt={albumData.name + " album cover"}
+        />
+      </div>
+      <div>
+        <h2>{albumData.name}</h2>
+        <p>by {albumData.artists.map((x) => x.name).join(", ")}</p>
+        <hr>
+        <ul>
+          <li>Total tracks: {albumData.totalTracks}</li>
+          <li>{albumData.releaseDate}</li>
+          <li>{albumData.label}</li>
+          <li>{albumData.copyrights[0].text}</li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h2>{albumData.name}</h2>
-      <p>by {albumData.artists.map((x) => x.name).join(", ")}</p>
-    </div>
-    <div>
+    <div class="tracklist">
       <h3>Tracklist</h3>
       <Tracklist tracks={albumData.tracks} />
     </div>
   </main>
 </Layout>
+
+<style>
+  .albuminfo__container {
+    display: flex;
+  }
+
+  .tracklist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
