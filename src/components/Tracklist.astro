@@ -1,35 +1,66 @@
 ---
+import SpotifyIcon from "../icons/spotify.astro";
+
 interface Props {
     tracks: Array<any>;
 }
 
 const { tracks } = Astro.props;
-console.log(tracks)
 ---
 
-<div>
+<div class="tracklist__container">
     {
         tracks.map(track => (
-          <p>
+          <p class="tracklist__item">
             {
               track.previewURL ? (
-              <button id={track.id} class="play-button">Play</button>
+              <button id={track.id} class="tracklist__play">Play</button>
               <audio id={"audio_" + track.id} src={track.previewURL} class="audio-preview"/>
               ) :
               null
             }
-            {track.trackNumber}. {track.name} | {track.artists.map(a => a.name).join(", ")}
-            <a href={track.externalURL.spotify} target="_blank">Open on Spotify</a>
+            <span>{track.trackNumber}. <b>{track.name}</b> | {track.artists.map(a => a.name).join(", ")}</span>
+            <a href={track.externalURL.spotify} target="_blank" class="tracklist__spotify-link">
+            <SpotifyIcon class:list={"tracklist__spotify-icon"}/>
+            </a>
           </p>
         ))
       }
 </div>
 
+<style>
+
+.tracklist__container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 15px 45px;
+    /*border: dashed 1px #ff10eb;*/
+}
+
+.tracklist__item {
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px
+}
+
+.tracklist__item:hover {
+    background-color: #f3f2f2;
+}
+
+.tracklist__container > p:not(:last-child) {
+    border-bottom: solid 1px #000;
+}
+</style>
+
 <script>
 
     let volume = 0.5;
   
-  [...document.querySelectorAll('.play-button')].forEach(function(item) {
+  [...document.querySelectorAll('.tracklist__play')].forEach(function(item) {
     item.addEventListener('click', function() {
       let id = item.id;
       let audio = document.getElementById("audio_" + id) as HTMLAudioElement;
