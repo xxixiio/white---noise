@@ -1,0 +1,70 @@
+---
+interface Props {
+  content: String;
+  variant?: String;
+  size?: String;
+  as: string;
+}
+
+const { content, variant, size, as, ...props } = Astro.props;
+
+const sizePicker = {
+    "big": "button-big",
+    "small": "button-small"
+}
+
+const variantPicker = {
+    "primary": "button-primary",
+    "secondary": "button-secondary"
+}
+
+const TagName = as;
+
+const buttonClass = [
+    "button",
+    sizePicker[size],
+    variantPicker[variant]
+].join(" ")
+---
+
+<TagName {...props} class:list={buttonClass}>
+  {content}
+</TagName>
+
+<style>
+  .button {
+    padding: 8px 15px;
+    transition: all .1s ease-in;
+    border-radius: var(--border-radius);
+  }
+
+  .button-big {
+    width: 100%;
+  }
+
+  .button-small {
+    width: auto;
+  }
+
+  .button-primary {
+    background-color: #000;
+    color: #fff;
+    border: solid 1px #000;
+  }
+
+  .button-primary:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .button-secondary {
+    background-color: #fff;
+    color: #000;
+    border: solid 1px #000; 
+  }
+
+  .button-secondary:hover {
+    background-color: #000;
+    color: #fff;
+  }
+</style>

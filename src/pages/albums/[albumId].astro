@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Tracklist from "../../components/Tracklist.astro";
+import Button from "../../components/Button.astro";
 
 interface Album {
   title: string;
@@ -25,12 +26,15 @@ const albumData = await response.json();
         <h2>{albumData.name}</h2>
         <p>by {albumData.artists.map((x) => x.name).join(", ")}</p>
         <hr>
+        <h3>Information:</h3>
         <ul>
           <li>Total tracks: {albumData.totalTracks}</li>
           <li>{albumData.releaseDate}</li>
           <li>{albumData.label}</li>
           <li>{albumData.copyrights[0].text}</li>
         </ul>
+        <hr>
+        <Button content="Buy album" as="button" size="big" variant="primary" />
       </div>
     </div>
     <div class="tracklist">
