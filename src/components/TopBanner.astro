@@ -26,7 +26,7 @@ function getFormattedTime() {
 ---
 
 <div class="banner__container">
-  <p class="banner__content">{content} <span class="timer">{getFormattedTime()}</span></p>
+  <p class="banner__content"><span class="timer">{getFormattedTime()}</span> --- {content}</p>
 </div>
 
 <style>
@@ -46,7 +46,7 @@ function getFormattedTime() {
     display: inline-block;
     height: 30px;
     line-height: 30px;
-    animation: scroll 350s linear infinite;
+    animation: scroll 200s linear infinite;
     
     &,
     & > .timer {
@@ -59,17 +59,11 @@ function getFormattedTime() {
     0% {
       transform: translateX(0%);
     }
-    49.9% {
-      transform: translateX(-230%);
-    }
     50% {
-      transform: translateX(-250%);
+      transform: translateX(-220%);
     }
     50.1% {
-      transform: translateX(250%);
-    }
-    50.2% {
-      transform: translateX(210%);
+      transform: translateX(220%);
     }
     100% {
       transform: translateX(0%);

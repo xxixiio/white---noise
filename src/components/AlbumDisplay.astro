@@ -1,4 +1,6 @@
 ---
+import generatePrice from "../utils/generatePrice";
+
 interface Props {
   title: string;
   image: string;
@@ -12,13 +14,15 @@ interface Artists {
 }
 
 const { title, image, artists, id } = Astro.props;
+
+const price = generatePrice(20.00, 60.00);
 ---
 
 <a href={"/albums/" + id} class="album_display__container">
   <img class="album_display__cover" src={image}>
   <p class="album_display__title">{title}</p>
   <p class="album_display__artists">{artists.map(x => x.name).join(", ")}</p>
-  <p class="album_display__price">29,95 €</p>
+  <p class="album_display__price">{price} €</p>
 </a>
 
 <style>
@@ -29,7 +33,12 @@ const { title, image, artists, id } = Astro.props;
     width: 225px;
     padding: 28px 20px;
     box-shadow: inset 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
+    transition: all ease-in .1s;
     border-radius: var(--border-radius);
+
+    &:hover {
+      box-shadow: inset 0px 0px 9px 0px rgba(0, 0, 0, 0.20);
+    }
   }
 
   .album_display__cover {
