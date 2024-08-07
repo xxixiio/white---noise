@@ -1,6 +1,4 @@
 ---
-import Header from "../sections/Header.astro";
-
 interface Props {
   title: string;
 }
@@ -19,22 +17,31 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <Header />
     <slot />
   </body>
 </html>
 <style is:global>
-  @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
   :root {
-    --color-sand: #E2DCC9;
-    --color-pale-purple: #F0E6F8;
-    --border-radius: 3px;
+    --color-background: #f4f3f2;
+    --color-text: #0b1215;
+    --color-primary: #241128;
+
+    --color-sand: #e2dcc9;
+    --color-pale-purple: #f0e6f8;
+    --border-radius: 5px;
   }
 
   * {
     margin: 0;
     padding: 0;
-    font-family: "Atkinson Hyperlegible";
+    font-family: "IBM Plex Mono", sans-serif, system-ui;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  html {
+    background-color: var(--color-background);
   }
 
   a {
@@ -46,17 +53,58 @@ const { title } = Astro.props;
     list-style-type: none;
   }
 
-  button, input[type="submit"], input[type="reset"] {
-	  background: none;
-	  color: inherit;
-	  border: none;
-	  padding: 0;
-	  font: inherit;
-	  cursor: pointer;
-	  outline: inherit;
+  button,
+  input[type="submit"],
+  input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
+  ::-moz-selection {
+    background: var(--color-sand);
+  }
+
+  ::selection {
+    background: var(--color-sand);
+  }
+
+  /* General Styles */
+
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .section__container {
+    margin: 100px 160px;
   }
 
   .hide {
     display: none;
+  }
+
+  .link1 {
+    text-decoration: underline;
+    padding: 0 2px;
+
+    &:hover {
+      background-color: var(--color-pale-purple);
+    }
   }
 </style>

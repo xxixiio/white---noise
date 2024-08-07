@@ -5,21 +5,37 @@ const response = await fetch(Astro.url.origin + "/api/albums/get-new-releases");
 const newReleases = await response.json();
 ---
 
-<section>
-    <h2>Latest Releases</h2>
-    <div class="latest__container">
-      {
-        newReleases.map((a, i) => (
-          <AlbumDisplay title={a.name} image={a.images[0].url} artists={a.artists} id={a.id}/>
-        ))
-      }
-    </div>
-  </section>
+<section class="section__container">
+  <div class="latest__text">
+    <h2 class="latest__title">LATEST RELEASES</h2>
+    <a class="link1" href="">SHOW MORE</a>
+  </div>
+  <div class="latest__container">
+    {
+      newReleases.map((a, i) => (
+        <AlbumDisplay
+          title={a.name}
+          image={a.images[0].url}
+          artists={a.artists}
+          id={a.id}
+        />
+      ))
+    }
+  </div>
+</section>
 
 <style>
-    .latest__container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        row-gap: 25px;
-    }
+  .latest__text {
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .latest__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
 </style>

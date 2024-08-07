@@ -62,7 +62,7 @@ const { tracks } = Astro.props;
 </style>
 
 <script>
-  let volume = 0.5;
+  let volume = 0.4;
   
   [...document.querySelectorAll('.tracklist__play')].forEach(function(item) {
     item.addEventListener('click', function() {
@@ -70,6 +70,8 @@ const { tracks } = Astro.props;
       let audio = document.getElementById("audio_" + id) as HTMLAudioElement;
       const playIcon = document.getElementById("play_" + id);
       const pauseIcon = document.getElementById("pause_" + id);
+
+      audio.volume = volume;
       
       if (audio.paused) {
         stopAllAudios(audio);

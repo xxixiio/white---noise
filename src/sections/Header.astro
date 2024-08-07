@@ -10,18 +10,32 @@ import HamburguerIcon from "../icons/hamburguer.astro";
   <div class="header__menu">
     <HamburguerIcon class:list={"header__hamburguer"} />
     <ul class="header__links">
-      <li><a href="">ABOUT</a></li>
+      <li><a href="">V/Y</a></li>
       <li><a href="">VINYLS</a></li>
       <li><a href="">ARTISTS</a></li>
+      <li><a href="">ABOUT</a></li>
+      <li><a href="">SEARCH</a></li>
     </ul>
   </div>
 </header>
+
+<script>
+  const logo = document.getElementsByClassName("logo")[0];
+
+  document.addEventListener("scroll", () => {
+    if(window.scrollY > 0) {
+      logo.classList.add("logo--shrink")
+    } else {
+      logo.classList.remove("logo--shrink")
+    }
+  })
+</script>
 
 <style>
   .header__container {
     position: sticky;
     top: 0;
-    background-color: #fff;
+    background-color: var(--color-background);
     padding: 20px 0;
     z-index: 100;
   }
@@ -29,15 +43,21 @@ import HamburguerIcon from "../icons/hamburguer.astro";
   .logo {
     display: block;
     margin: auto;
-    width: 30vw;
+    height: 40px;
     margin-bottom: 30px;
     text-align: center;
+    transition: height ease .1s;
+  }
+
+  .logo--shrink {
+    height: 28px;
   }
 
   .header__links {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    margin: 0 20%;
   }
 
   .header__links > li > a {

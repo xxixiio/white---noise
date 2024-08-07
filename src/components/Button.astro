@@ -1,17 +1,5 @@
 ---
-interface Props {
-  content: String;
-  variant?: String;
-  size?: String;
-  as: string;
-}
-
-const { content, variant, size, as, ...props } = Astro.props;
-
-const sizePicker = {
-    "big": "button-big",
-    "small": "button-small"
-}
+const { content, variant, as, class: className, ...props } = Astro.props;
 
 const variantPicker = {
     "primary": "button-primary",
@@ -22,8 +10,8 @@ const TagName = as;
 
 const buttonClass = [
     "button",
-    sizePicker[size],
-    variantPicker[variant]
+    variantPicker[variant],
+    className
 ].join(" ")
 ---
 
@@ -36,14 +24,6 @@ const buttonClass = [
     padding: 8px 15px;
     transition: all .1s ease-in;
     border-radius: var(--border-radius);
-  }
-
-  .button-big {
-    width: 100%;
-  }
-
-  .button-small {
-    width: auto;
   }
 
   .button-primary {

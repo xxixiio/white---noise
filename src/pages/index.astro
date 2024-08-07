@@ -1,4 +1,6 @@
 ---
+import Header from "../sections/Header.astro";
+import TopBanner from "../components/TopBanner.astro";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../sections/Hero.astro";
 import LatestReleases from "../sections/LatestReleases.astro"
@@ -6,6 +8,8 @@ import LatestReleases from "../sections/LatestReleases.astro"
 
 <Layout title="white---noise / Vinyl store">
   <main>
+    <TopBanner content={"Further reductions on the SS24 Sale ~ Take an additional 20% "} />
+    <Header />
     <Hero />
 	  <LatestReleases />
   </main>

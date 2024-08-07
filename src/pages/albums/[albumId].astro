@@ -20,21 +20,22 @@ const albumData = await response.json();
         <img
           src={albumData.images[0].url}
           alt={albumData.name + " album cover"}
+          class="albuminfo__cover"
         />
       </div>
-      <div>
-        <h2>{albumData.name}</h2>
-        <p>by {albumData.artists.map((x) => x.name).join(", ")}</p>
+      <div class="albuminfo__data">
+        <h2 class="albuminfo__name">{albumData.name}</h2>
+        <p class="albuminfo__artists">by {albumData.artists.map((x) => x.name).join(", ")}</p>
         <hr>
         <h3>Information:</h3>
         <ul>
           <li>Total tracks: {albumData.totalTracks}</li>
           <li>{albumData.releaseDate}</li>
           <li>{albumData.label}</li>
-          <li>{albumData.copyrights[0].text}</li>
+          <!-- <li>{albumData.copyrights[0].text}</li> -->
         </ul>
         <hr>
-        <Button content="Buy album" as="button" size="big" variant="primary" />
+        <Button content="Buy album" as="button" variant="primary" />
       </div>
     </div>
     <div class="tracklist">
@@ -47,6 +48,12 @@ const albumData = await response.json();
 <style>
   .albuminfo__container {
     display: flex;
+    justify-content: center;
+    gap: 100px
+  }
+
+  .albuminfo__cover {
+    width: 500px;
   }
 
   .tracklist {

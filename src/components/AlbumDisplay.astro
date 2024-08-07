@@ -14,14 +14,34 @@ interface Artists {
 const { title, image, artists, id } = Astro.props;
 ---
 
-<a href={"/albums/" + id} class="album-display__container">
-  <img src={image} />
-  <p>{title}</p>
-  <p>{artists.map(x => x.name).join(", ")}</p>
+<a href={"/albums/" + id} class="album_display__container">
+  <img class="album_display__cover" src={image}>
+  <p class="album_display__title">{title}</p>
+  <p class="album_display__artists">{artists.map(x => x.name).join(", ")}</p>
+  <p class="album_display__price">29,95 €</p>
 </a>
 
 <style>
-  .album-display__container {
+  .album_display__container {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 225px;
+    padding: 28px 20px;
+    box-shadow: inset 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
+    border-radius: var(--border-radius);
+  }
+
+  .album_display__cover {
+    margin-bottom: 16px;
+    border-radius: var(--border-radius);
+  }
+
+  .album_display__title {
+    font-weight: 600;
+  }
+
+  .album_display__artists {
+    margin-bottom: 8px;
   }
 </style>
