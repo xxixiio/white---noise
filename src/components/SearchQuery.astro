@@ -1,0 +1,65 @@
+---
+import AlbumDisplay from "./AlbumDisplay.astro";
+import ArtistDisplay from "./ArtistDisplay.astro";
+
+interface Props {
+  query: String;
+}
+
+const { query } = Astro.props;
+
+const albumSearchResponse = await fetch(
+  `${Astro.url.origin}/api/albums/search/${query}`
+);
+const albumsSearchResult = await albumSearchResponse.json();
+
+const artistSearchResponse = await fetch(
+  `${Astro.url.origin}/api/artists/search/${query}`
+);
+const artistsSearchResult = await artistSearchResponse.json();
+---
+
+<section class="section__container">
+  <div class="search__section">
+    <h2 class="search__title">ALBUMS</h2>
+    <div class="search__albums">
+      {
+        albumsSearchResult.map((a, i) => (
+          <AlbumDisplay
+            title={a.name}
+            image={a.images[0].url}
+            artists={a.artists}
+            id={a.id}
+          />
+        ))
+      }
+    </div>
+  </div>
+  <div>
+    <h2 class="search__title">ARTISTS</h2>
+    <div class="search__albums">
+      {
+        artistsSearchResult.map((a, i) => (
+          <ArtistDisplay name={a.name} image={a.images[0]?.url} id={a.id} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .search__title {
+    margin-bottom: 40px;
+  }
+
+  .search__albums {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
+
+  .search__section {
+    margin-bottom: 60px;
+  }
+</style>

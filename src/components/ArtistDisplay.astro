@@ -1,0 +1,40 @@
+---
+interface Props {
+  name: string;
+  image: string;
+  id: string;
+}
+
+let { name, image, id } = Astro.props;
+
+image = image ? image : "/img/default-pfp.jpg"
+---
+
+<a href={"/artists/" + id} class="artist_display__container">
+  <div
+    class="artist_display__image"
+    style={{ backgroundImage: `url(${image})` }}
+  >
+  </div>
+  <p class="artist_display__name">{name}</p>
+</a>
+
+<style>
+  .artist_display__container {
+    width: 225px;
+    text-align: center;
+  }
+
+  .artist_display__image {
+    background: transparent no-repeat center;
+    background-size: cover;
+    border-radius: 100%;
+    width: 225px;
+    height: 225px;
+    margin-bottom: 12px;
+  }
+
+  .artist_display__name {
+    font-weight: 600;
+  }
+</style>

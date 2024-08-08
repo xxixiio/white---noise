@@ -1,0 +1,48 @@
+---
+import Header from "../../sections/Header.astro";
+import TopBanner from "../../components/TopBanner.astro";
+import Layout from "../../layouts/Layout.astro";
+import SearchQuery from "../../components/SearchQuery.astro"
+
+const query = Astro.url.searchParams.get('q') || '';
+---
+
+<Layout title="Search / white---noise">
+  <main>
+    <TopBanner content={"Further reductions on the SS24 Sale ~ Take an additional 20% "} />
+    <Header />
+
+    <input type="text" name="search_input" id="search_input" value={query}>
+
+    {
+        query ?
+        <SearchQuery query={query} />
+        :
+        null
+    }
+  </main>
+</Layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById("search_input");
+  
+      const search = () => {
+        const query = (searchInput as HTMLInputElement).value;
+        const url = new URL(window.location.toString());
+        url.searchParams.set("q", query);
+        window.location.href = url.toString();
+      };
+  
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          search();
+        }
+      });
+  
+      searchInput.addEventListener("blur", () => {
+        search();
+      });
+    });
+  </script>
