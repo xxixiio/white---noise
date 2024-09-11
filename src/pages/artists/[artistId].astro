@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Header from "../../sections/Header.astro";
+import Footer from "../../sections/Footer.astro";
 
 const { artistId } = Astro.params;
 
@@ -9,6 +11,8 @@ const artistData = await response.json();
 
 <Layout title={artistData.name + " / white---noise"}>
   <main>
+    <Header />
     <h2>{artistData.name}</h2>
+    <Footer />
   </main>
 </Layout>

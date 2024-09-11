@@ -1,0 +1,77 @@
+---
+import Logo from "../components/Logo.astro";
+---
+
+<footer class="footer__container">
+  <div class="footer__info">
+    <div class="footer__section">
+      <Logo class:list={"logo"} />
+      <b>Join the white---noise community for 10% off your first order</b>
+    </div>
+    <div class="footer__section">
+      <b class="footer__title">HELP</b>
+      <a href="" class="link2">CONTACT US</a>
+      <a href="" class="link2">FAQ</a>
+      <a href="" class="link2">SHIPPING & RETURNS</a>
+      <a href="" class="link2">PAYMENT METHODS</a>
+      <a href="" class="link2">TRACK YOUR ORDER</a>
+    </div>
+    <div class="footer__section">
+      <b class="footer__title">LEGAL</b>
+      <a href="" class="link2">TERMS & CONDITIONS</a>
+      <a href="" class="link2">ACCESSIBILITY</a>
+      <a href="" class="link2">PRIVACY POLICY</a>
+      <a href="" class="link2">COOKIES POLICY</a>
+      <a href="" class="link2">COOKIE PREFERENCES</a>
+    </div>
+    <div class="footer__section">
+      <b class="footer__title">FIND US</b>
+      <a href="" class="link2">STORE LOCATIOR</a>
+      <b class="footer__title footer__title--margin">FOLLOW US</b>
+      <a href="" class="link2">X</a>
+      <a href="" class="link2">INSTAGRAM</a>
+      <a href="" class="link2">YOUTUBE</a>
+    </div>
+  </div>
+  <p class="footer__copyright">© 2024 white---noise™. All rights reserved.</p>
+</footer>
+
+<style>
+
+.footer__container {
+  padding: 16px 20px;
+}
+
+  .footer__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 60px 0;
+    border-top: 1px solid #00000020;
+  }
+
+  .footer__section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__title {
+    margin-bottom: 8px;
+  }
+
+  .footer__title--margin {
+    margin-top: 28px;
+  }
+
+  .logo {
+    display: block;
+    height: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+    transition: height ease 0.1s;
+  }
+
+  .footer__copyright {
+    font-size: 12px;
+  }
+</style>

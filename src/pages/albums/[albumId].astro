@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Header from "../../sections/Header.astro";
+import Footer from "../../sections/Footer.astro";
 import Tracklist from "../../components/Tracklist.astro";
 import Button from "../../components/Button.astro";
 
@@ -15,6 +17,7 @@ const albumData = await response.json();
 
 <Layout title={albumData.name + " / white---noise"}>
   <main>
+    <Header />
     <div class="albuminfo__container">
       <div>
         <img
@@ -42,6 +45,7 @@ const albumData = await response.json();
       <h3>Tracklist</h3>
       <Tracklist tracks={albumData.tracks} />
     </div>
+    <Footer />
   </main>
 </Layout>
 
