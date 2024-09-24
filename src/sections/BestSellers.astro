@@ -10,19 +10,40 @@ const bestSellers = await response.json();
     <h2 class="latest__title">BEST SELLERS</h2>
     <a class="link1" href="">SHOW MORE</a>
   </div>
-  <div class="latest__container">
-    {
-      bestSellers.map((a, i) => (
-        <AlbumDisplay
-          title={a.name}
-          image={a.images[0].url}
-          artists={a.artists}
-          id={a.id}
-        />
-      ))
-    }
+  <div class="latest__container" id="LatestSlider">
+    <ul class="swiper-wrapper" data-cursor="swipe">
+      {
+        bestSellers.map((a, i) => (
+        <li class="swiper-slide">
+          <AlbumDisplay
+            title={a.name}
+            image={a.images[0].url}
+            artists={a.artists}
+            id={a.id}
+          />
+        </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
+
+<script>
+
+  import 'swiper/css';
+  import Swiper from 'swiper';
+  import { register } from 'swiper/element/bundle';
+  register();
+
+  const swiper = new Swiper('#LatestSlider', {
+      loop: true,
+      slidesPerView: 5,
+      autoplay: false,
+      grabCursor: true,
+      mousewheel: false,
+  });
+
+</script>
 
 <style>
   .latest__text {

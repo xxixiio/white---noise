@@ -10,7 +10,6 @@ import HamburguerIcon from "../icons/hamburguer.astro";
   <div class="header__menu">
     <HamburguerIcon class:list={"header__hamburguer"} />
     <ul class="header__links">
-      <li><a href="">V/Y</a></li>
       <li><a href="">VINYLS</a></li>
       <li><a href="">ARTISTS</a></li>
       <li><a href="">ABOUT</a></li>
@@ -21,6 +20,8 @@ import HamburguerIcon from "../icons/hamburguer.astro";
 
 <script>
   const logo = document.getElementsByClassName("logo")[0];
+  const menu = document.querySelector(".header__links");
+  const hamburguer = document.querySelector(".header__hamburguer");
 
   document.addEventListener("scroll", () => {
     if(window.scrollY > 0) {
@@ -28,7 +29,11 @@ import HamburguerIcon from "../icons/hamburguer.astro";
     } else {
       logo.classList.remove("logo--shrink")
     }
-  })
+  });
+
+  hamburguer.addEventListener("click", () => {
+    menu.classList.toggle("header__links--active");
+  });
 </script>
 
 <style>
@@ -47,6 +52,7 @@ import HamburguerIcon from "../icons/hamburguer.astro";
     margin-bottom: 30px;
     text-align: center;
     transition: height ease .1s;
+    overflow: visible;
   }
 
   .logo--shrink {
@@ -75,30 +81,43 @@ import HamburguerIcon from "../icons/hamburguer.astro";
     display: none;
   }
 
-  @media only screen and (max-width: 600px) {
-  .logo {
-    width: 60vw;
-    margin: 0;
-  }
+  @media only screen and (max-width: 700px) {
+    .header__container {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      align-items: center;
+    }
 
-  .header__links {
-    display: none;
-  }
+    .logo {
+      width: 60vw;
+      margin: 0;
+      margin-bottom: 0;
+    }
 
-  .header__container {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  
-  .header__hamburguer {
-    width: 35px;
-    display: inline;
-  }
+    .header__links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      background-color: var(--color-background);
+      text-align: center;
+      padding: 20px 0;
+    }
 
-  .header__menu {
-    height: 35px;
+    .header__links.header__links--active {
+      display: flex;
+    }
+
+    .header__hamburguer {
+      display: inline;
+      width: 35px;
+    }
+
+    .header__menu {
+      height: 35px;
+    }
   }
-}
 </style>
