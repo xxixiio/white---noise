@@ -19,10 +19,14 @@ const price = generatePrice(20.00, 60.00);
 ---
 
 <a href={"/albums/" + id} class="album_display__container">
-  <img class="album_display__cover" src={image}>
-  <p class="album_display__title">{title}</p>
-  <p class="album_display__artists">{artists.map(x => x.name).join(", ")}</p>
-  <p class="album_display__price">{price} €</p>
+  <img class="album_display__cover" src={image} alt={title}>
+  <div class="album_display__content">
+    <p class="album_display__title">{title}</p>
+    <p class="album_display__artists">{artists.map(x => x.name).join(", ")}</p>
+  </div>
+  <div class="album_display__footer">
+    <p class="album_display__price">{price} €</p>
+  </div>
 </a>
 
 <style>
@@ -38,6 +42,7 @@ const price = generatePrice(20.00, 60.00);
     box-shadow: inset 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
     transition: all ease-in 0.1s;
     border-radius: var(--border-radius);
+    justify-content: space-between;
     background-color: white;
     box-sizing: border-box;
 
@@ -47,7 +52,7 @@ const price = generatePrice(20.00, 60.00);
   }
 
   .album_display__cover {
-    width: 100%;
+    width: 90%;
     height: auto;
     margin-bottom: 16px;
     border-radius: var(--border-radius);
@@ -59,6 +64,12 @@ const price = generatePrice(20.00, 60.00);
 
   .album_display__artists {
     margin-bottom: 8px;
+  }
+
+  .album_display__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
   }
 
   @media (max-width: 600px) {
