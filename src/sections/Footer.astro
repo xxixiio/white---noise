@@ -37,10 +37,9 @@ import Logo from "../components/Logo.astro";
 </footer>
 
 <style>
-
-.footer__container {
-  padding: 16px 20px;
-}
+  .footer__container {
+    padding: 16px 20px;
+  }
 
   .footer__info {
     display: flex;
@@ -69,9 +68,18 @@ import Logo from "../components/Logo.astro";
     margin-bottom: 30px;
     text-align: center;
     transition: height ease 0.1s;
+    overflow: visible;
   }
 
   .footer__copyright {
     font-size: 12px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .footer__info {
+      text-align: center;
+      flex-direction: column;
+      gap: 30px;
+    }
   }
 </style>
