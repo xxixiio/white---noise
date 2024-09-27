@@ -5,24 +5,53 @@ const response = await fetch(Astro.url.origin + "/api/albums/get-new-releases");
 const newReleases = await response.json();
 ---
 
-<section class="section__container">
+<section class="section__container--no_margin">
   <div class="latest__text">
     <h2 class="latest__title">LATEST RELEASES</h2>
     <a class="link1" href="">SHOW MORE</a>
   </div>
-  <div class="latest__container">
-    {
-      newReleases.map((a, i) => (
-        <AlbumDisplay
-          title={a.name}
-          image={a.images[0].url}
-          artists={a.artists}
-          id={a.id}
-        />
-      ))
-    }
+  <div class="latest__container" id="LatestSlider">
+    <ul class="swiper-wrapper" data-cursor="swipe">
+      {
+        newReleases.map((a, i) => (
+          <li class="swiper-slide">
+            <AlbumDisplay
+              title={a.name}
+              image={a.images[0].url}
+              artists={a.artists}
+              id={a.id}
+            />
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
+
+<script>
+  import "swiper/css";
+  import Swiper from "swiper";
+  import { register } from "swiper/element/bundle";
+  register();
+
+  const swiper = new Swiper("#LatestSlider", {
+    //loop: true,
+    autoplay: false,
+    grabCursor: true,
+    mousewheel: false,
+    breakpoints: {
+      1024: {
+        slidesPerView: 6,
+      },
+      768: {
+        slidesPerView: 4,
+      },
+      480: {
+        slidesPerView: 3,
+      },
+    },
+  });
+</script>
 
 <style>
   .latest__text {
@@ -30,11 +59,13 @@ const newReleases = await response.json();
     margin-bottom: 40px;
     align-items: center;
     gap: 28px;
+    margin: 40px 160px;
   }
 
   .latest__container {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 20px;
     gap: 40px;
     justify-content: center;
   }

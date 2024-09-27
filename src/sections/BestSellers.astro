@@ -10,7 +10,7 @@ const bestSellers = await response.json();
     <h2 class="latest__title">BEST SELLERS</h2>
     <a class="link1" href="">SHOW MORE</a>
   </div>
-  <div class="latest__container" id="LatestSlider">
+  <div class="latest__container" id="BestSellersSlider">
     <ul class="swiper-wrapper" data-cursor="swipe">
       {
         bestSellers.map((a, i) => (
@@ -35,7 +35,7 @@ const bestSellers = await response.json();
   import { register } from 'swiper/element/bundle';
   register();
 
-  const swiper = new Swiper('#LatestSlider', {
+  const swiper = new Swiper('#BestSellersSlider', {
       //loop: true,
       autoplay: false,
       grabCursor: true,
